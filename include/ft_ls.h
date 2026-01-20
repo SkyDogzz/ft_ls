@@ -33,4 +33,10 @@ void init_flags(LS_Flag *flags);
 size_t count_folders(char **argv);
 char **parse_folder(char **argv);
 
+typedef struct Leaf {
+  size_t child_count;
+  struct dirent *dirinfo;
+  struct Leaf *childs;
+} Leaf;
+
 #endif
