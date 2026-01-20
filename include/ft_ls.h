@@ -36,7 +36,14 @@ char **parse_folder(char **argv);
 typedef struct Leaf {
   size_t child_count;
   struct dirent *dirinfo;
-  struct Leaf *childs;
+  struct Leaf **childs;
 } Leaf;
+
+Leaf *leaf_create(void);
+Leaf **leaf_bulk_create(size_t count);
+
+void print_tree(Leaf *root);
+
+void sort_child(Leaf *root);
 
 #endif

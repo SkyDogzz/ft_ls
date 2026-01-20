@@ -18,7 +18,8 @@ OBJ_PATH := obj/
 
 SRC := main.c \
 			 flags.c \
-			 folders.c
+			 folders.c \
+			 tree.c
 
 SRCS := $(addprefix $(SRC_PATH), $(SRC))
 OBJS := $(addprefix $(OBJ_PATH), $(SRC:.c=.o))

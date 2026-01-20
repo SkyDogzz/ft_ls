@@ -15,7 +15,7 @@ size_t count_folders(char **argv) {
 
   argv++;
   while (*argv) {
-    if (*argv[0] != '-')
+    if (strlen(*argv) > 0 && *argv[0] != '-')
       count++;
     argv++;
   }
@@ -45,17 +45,18 @@ char **parse_folder(char **argv) {
   folder = (char **)malloc(sizeof(char *) * (count + 1));
   if (!folder)
     return NULL;
-  argv++;
   if (act) {
     folder[0] = strdup(".");
+    folder[1] = NULL;
     if (!folder[0]) {
       free_tab(folder);
       return NULL;
     }
     return folder;
   }
+  argv++;
   while (*argv) {
-    if (*argv[0] != '-') {
+    if (strlen(*argv) > 0 && (*argv)[0] != '-') {
       folder[i] = strdup(*argv);
       if (!folder[i]) {
         free_tab(folder);
