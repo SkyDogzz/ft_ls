@@ -43,6 +43,7 @@ Leaf *leaf_create(void);
 Leaf **leaf_bulk_create(size_t count);
 
 void print_tree(Leaf *root);
+void print_dir(Leaf *root, LS_Flag flags);
 
 void sort_child(Leaf *root);
 

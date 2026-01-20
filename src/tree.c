@@ -1,4 +1,5 @@
 #include "ft_ls.h"
+#include <dirent.h>
 #include <stdlib.h>
 
 Leaf *leaf_create(void) {
@@ -87,13 +88,35 @@ void sort_child(Leaf *root) {
   }
 }
 
-void print_tree(Leaf *root) {
+bool is_hidden(struct dirent dirinfo) { return dirinfo.d_name[0] == '.'; }
+
+void print_dir(Leaf *root, LS_Flag flags) {
   size_t i = 0;
 
-  while (i < root->child_count) {
-    if (root && root->childs && root->childs[i] && root->childs[i]->dirinfo)
-      printf("%s  ", root->childs[i]->dirinfo->d_name);
-    i++;
+  if (!flags.r) {
+    while (i < root->child_count) {
+      if (root && root->childs && root->childs[i] && root->childs[i]->dirinfo) {
+        if (!flags.a) {
+          if (!is_hidden(*root->childs[i]->dirinfo) == true)
+            printf("%s  ", root->childs[i]->dirinfo->d_name);
+        } else
+          printf("%s  ", root->childs[i]->dirinfo->d_name);
+      }
+      i++;
+    }
+  } else {
+    i = root->child_count - 1;
+    while ((int)i >= 0) {
+      if (root && root->childs && root->childs[i] && root->childs[i]->dirinfo) {
+        if (!flags.a) {
+          if (!is_hidden(*root->childs[i]->dirinfo) == true)
+            printf("%s  ", root->childs[i]->dirinfo->d_name);
+        } else
+          printf("%s  ", root->childs[i]->dirinfo->d_name);
+      }
+      i--;
+    }
   }
-  printf("\n");
+  if (!flags.l)
+    printf("\n");
 }

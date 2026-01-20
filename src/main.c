@@ -41,7 +41,7 @@ int main(int argc, char **argv) {
       }
     }
     sort_child(root);
-    print_tree(root);
+    print_dir(root, flags);
   }
 
   return EXIT_SUCCESS;
